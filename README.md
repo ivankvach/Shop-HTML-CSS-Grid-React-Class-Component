@@ -3,7 +3,7 @@
 ![Alt text](./src/images/SingleProduct.png "Optional title")
 ![Alt text](./src/images/Cart1.png "Optional title")
 ![Alt text](./src/images/CartPopup.png "Optional title")
-![Alt text](./src/images/CarrencyPopUp.png "Optional title")
+![Alt text](./src/images/CurrencyPopUp.png "Optional title")
 
 # Getting Started with Create React App
 

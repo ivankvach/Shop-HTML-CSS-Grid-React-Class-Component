@@ -114,7 +114,7 @@ class Cart extends React.Component {
         console.log(itemS);
         console.log(this.itemS);
         localStorage.setItem("cart", JSON.stringify(itemS))
-        console.log(this.state.charge)
+        console.log(this.state.items1)
 
         return (
             <div className="wrapper_cart">
@@ -128,13 +128,13 @@ class Cart extends React.Component {
                                         <h1>{item.title}</h1>
                                         <h2>{item.title}</h2>
                                         <h3>{getSymbolFromCurrency(currency.slice(0, 3))}{(parseFloat(currency.slice(3)).toFixed(2) * item.price).toFixed(2)}</h3>
-                                        <h4>SIZE:{item.size}</h4>
+                                        <h4>SIZE:</h4>
                                         <select name="size" className="cart_section_single_product_1_options_size_select" size="8" onClick={(e) => this.addSize(item, e)} required>
-                                            {item.allsize.map((size) => <option className="cart_section_single_product_1_options_size_xs" value={size}>{size}</option>)}
+                                            {item.allsize.map((size) => <option className="cart_section_single_product_1_options_size_xs" style={ size === item.size ? {  backgroundColor: "black", color: "white"} : {  backgroundColor: "white", color: "black"}} value={size}>{size}</option>)}
                                         </select>
                                         <h4>COLOR:</h4>
                                         <select name="color" className="cart_section_single_product_1_options_color_select" size="8" tabIndex="-1" onClick={(e) => this.addColor(item, e)} required>
-                                            {item.allcolor.map((color) => <option className="cart_section_single_product_1_options_color_grey" tabIndex="0" onClick={(e) => e.target.style.boxShadow = `0 0 10px 100px ${color} inset`} style={{ backgroundColor: color, color: color }} value={color}></option>)}
+                                            {item.allcolor.map((color) => <option className="cart_section_single_product_1_options_color_grey" tabIndex="0" onClick={(e) => e.target.style.boxShadow = `0 0 10px 100px ${color} inset`} style={ color === item.color ? { width: "35px", height: "35px", border: "2px solid grey", backgroundColor: color, color: color } : { backgroundColor: color, color: color }} value={color}></option>)}
                                         </select>
                                     </div>
                                     <div className="cart_section_single_product_1_options_photo">

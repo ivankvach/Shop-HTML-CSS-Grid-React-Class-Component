@@ -26,8 +26,8 @@ class Products extends React.Component {
                 <Link to={`single-product/${item.id}`}><img src={require('../images/' + item.photo + '.png')} alt="1" /></Link>
               </div>
               <div className="product_list_sigle_descriptions">
-              <Link to={`single-product/${item.id}`}><h2>{item.title}{this.state.query}</h2></Link>
-              <Link to={`single-product/${item.id}`}><h2>{getSymbolFromCurrency(currency.slice(0, 3))} {(parseFloat(currency.slice(3)).toFixed(2) * item.price).toFixed(2)}</h2></Link>
+              <Link to={`single-product/${item.id}`}><h2 className="product_list_sigle_descriptions_title">{item.title}{this.state.query}</h2></Link>
+              <Link to={`single-product/${item.id}`}><h2 className="product_list_sigle_descriptions_price">{getSymbolFromCurrency(currency.slice(0, 3))} {(parseFloat(currency.slice(3)).toFixed(2) * item.price).toFixed(2)}</h2></Link>
               </div>
             </div>
           )}

@@ -11,6 +11,7 @@ class MiniCart extends React.Component {
         this.products = products;
         this.itemS = props.itemS;
         this.sendToCart = props.sendToCart.bind();
+        this.sendOrder = props.sendOrder.bind();
         this.deleteToCart = props.deleteToCart.bind();
         this.addColor = props.addColor.bind();
         this.addSize = props.addSize.bind();
@@ -119,6 +120,7 @@ class MiniCart extends React.Component {
 
         return (
             <div className="wrapper_minicart">
+                <form action='/cart'>
                 <h3 id="wrapper_minicart_title">My Bag, {itemS.length} items</h3>
                 {this.state.emptyCart ?
                     <div className="minicart_section">
@@ -130,11 +132,11 @@ class MiniCart extends React.Component {
                                     <h3>{getSymbolFromCurrency(currency.slice(0, 3))}{(parseFloat(currency.slice(3)).toFixed(2) * item.price).toFixed(2)}</h3>
                                     <h4>SIZE:</h4>
                                     <select name="size" className="minicart_section_single_product_1_options_size_select" size="8" onClick={(e) => this.addSize(item, e)} required>
-                                        {item.allsize.map((size) => <option className="cart_section_single_product_1_options_size_xs" value={size}>{size}</option>)}
+                                        {item.allsize.map((size) => <option className="cart_section_single_product_1_options_size_xs" style={ size === item.size ? {  backgroundColor: "black", color: "white"} : {  backgroundColor: "white", color: "black"}} value={size}>{size}</option>)}
                                     </select>
                                     <h4>COLOR:</h4>
                                     <select name="color" className="minicart_section_single_product_1_options_color_select" size="8" tabindex="-1" onClick={(e) => this.addColor(item, e)} required>
-                                        {item.allcolor.map((color) => <option className="minicart_section_single_product_1_options_color" tabindex="0" onClick={(e) => e.target.style.boxShadow = `0 0 10px 100px ${color} inset`} style={{ backgroundColor: color, color: color }} value={color}></option>)}
+                                        {item.allcolor.map((color) => <option className="minicart_section_single_product_1_options_color" tabindex="0" onClick={(e) => e.target.style.boxShadow = `0 0 10px 100px ${color} inset`} style={ color === item.color ? { width: "27px", height: "27px", border: "2px solid grey", backgroundColor: color, color: color } : { backgroundColor: color, color: color }} value={color}></option>)}
                                     </select>
                                 </div>
                                 <div className="minicart_section_single_product_1_options_photo">
@@ -151,19 +153,20 @@ class MiniCart extends React.Component {
                             <div className="minicart_section_order_send_left_section">
                                 <h2>Total</h2>
                                 <div className="minicart_section_order_send_button">
-                                    <button className="minicart_section_order_send_button_back" onClick={() => this.turnCr()}>Hide</button>
+                                    <Link to="cart" className="minicart_section_order_send_button_order" onClick={() => this.turnCr()}>VIEW BAG</Link>
                                 </div>
                             </div>
                             <div className="minicart_section_order_send_right_section">
                                 <h2>{getSymbolFromCurrency(currency.slice(0, 3))}{(parseFloat(currency.slice(3)).toFixed(2) * this.state.price).toFixed(2)}</h2>
                                 <div className="minicart_section_order_send_button">
-                                    <Link to="cart" className="minicart_section_order_send_button_order" onClick={() => this.turnCr()}>Go to cart</Link>
+                                <button type="submit" className="minicart_section_order_send_button_back" onClick={() => this.sendOrder()}>CHECK OUT</button>
                                 </div>
                                 <div />
                             </div>
                         </div>
                     </div>
                     : <h2>Your cart is empty</h2>}
+                    </form>
             </div>
         )
 
@@ -209,6 +212,9 @@ const mapDispatchToProps = dispatch => {
         turnCrr: () => {
             dispatch(turnCurrency())
             console.log("i am clicked")
+        },
+        sendOrder: () => {
+            localStorage.removeItem("cart")
         }
     }
 }

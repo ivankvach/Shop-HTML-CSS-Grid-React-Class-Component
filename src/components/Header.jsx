@@ -83,7 +83,7 @@ class Header extends React.Component {
           {this.state.cart ? <MiniCart /> : " "}
         </div>
         {this.state.cart ? <div className="cover" onClick={() => this.turnCr()}></div> : " "}
-        {this.state.currency ? <div className="cover" onClick={() => this.turnCrr()}></div> : " "}
+        {/* {this.state.currency ? <div className="cover" onClick={() => this.turnCrr()}></div> : " "} */}
       </>
     )
   }

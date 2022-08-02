@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setCurrencY } from '../actions'
+import { setCurrencY,turnCurrency } from '../actions'
 import getSymbolFromCurrency from 'currency-symbol-map';
 
 class CurrencyOptions extends React.Component {
@@ -30,6 +30,7 @@ const mapDispatchToProps = dispatch => {
   return {
     setCurrency: (e) => {
       dispatch(setCurrencY(e.target.value));
+      dispatch(turnCurrency())
     }
 
   }

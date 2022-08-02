@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Raleway';
+    src: url('https://fonts.googleapis.com/css?family=Raleway');
+}
+* {
+    font-family: 'Raleway';
+}
 .wrapper {
     display: grid;
     position: relative;
@@ -133,6 +140,14 @@ a :hover a :active {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 4fr 1fr;
+    font-family: Raleway;
+    font-size: 18px;
+}
+.product_list_sigle_descriptions_title {
+    font-weight: 300;
+}
+.product_list_sigle_descriptions_price {
+    font-weight: 600;
 }
 
 img {
@@ -141,13 +156,16 @@ img {
     object-fit: cover;
 }
 
-.product_list_sigle>div :hover {
-    opacity: 0.8;
+.product_list_sigle:hover {
+    box-shadow: 5px 5px 15px #EEEEEE;
+    padding: 20px;
+    position: relative;
 }
 
-.product_list_sigle :hover {
-    opacity: 0.8;
-}
+/* .product_list_sigle :hover {
+    
+    box-shadow: 5px 5px 15px #EEEEEE;
+} */
 
 .products_category {
     margin: 70px 0 70px 0;
@@ -270,11 +288,10 @@ img {
 }
 
 .single_product_right_section_options_button>button {
-    background-color: green;
+    background-color: #5ECE7B;
     border: none;
     color: white;
     font-size: 20px;
-    ;
     height: 60px;
     margin: 10px 0 20px 0;
 }
@@ -288,6 +305,67 @@ img {
 .single_product_right_section_options_paragraph {
     margin: 20px 0 0 0;
     font-size: 22px;
+}
+
+/* .single_product_1_options_size_select :checked {
+    background-color: red;
+    color: white;
+    border: 2px solid black;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: all .2s ease-in-out;
+} */
+
+.single_product_1_options_color_select {
+    display: inline-block;
+    height: 3em;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    overflow: hidden;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.single_product_1_options_color_select :-webkit-autofill :active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.single_product_1_options_color_select :hover {
+    border: 2px solid black;
+}
+
+.single_product_1_options_color_select :checked {
+    background-color: red;
+    color: white;
+    border: 2px solid black;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: all .2s ease-in-out;
+}
+.single_product_1_options_color_select :active {
+    color: rgb(170, 62, 62);
+}
+
+.single_product_1_options_color_select option[selected] {
+    border: 34px solid black;
+}
+
+.single_product_1_options_color_select option {
+    width: 2.5em;
+    height: 2.5em;
+    float: left;
+    overflow: hidden;
+    border: none;
+    text-overflow: ellipsis;
+    -webkit-text-fill-color: inset 0 0 0 50px #fff;
+    margin-right: 20px;
+}
+
+.single_product_1_options_color_select>div {
+    border: grey 1px solid;
+    justify-content: center;
+    align-items: center;
 }
 
 .wrapper_cart {
@@ -435,7 +513,7 @@ img {
 .cart_section_single_product_1_options_color_select :checked {
     background-color: red;
     color: white;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     background-repeat: no-repeat;
     background-size: cover;
     transition: all .2s ease-in-out;
@@ -573,7 +651,7 @@ img {
 }
 
 .cart_section_order_send_button>button {
-    background-color: green;
+    background-color: #5ECE7B;
     border: none;
     color: white;
     font-size: 20px;
@@ -725,29 +803,30 @@ img {
 
 .minicart_section_order_send_button_order {
     display: grid;
-    background-color: green;
-    border: none;
-    color: white;
-    font-size: 20px;
-    ;
-    height: 50px;
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    font-size: 16px;
+    height: 48px;
     justify-content: center;
     align-items: center;
 }
 
 .minicart_section_order_send_button_back {
-    background-color: grey;
-    border: none;
+    display: grid;
+    background-color: #5ECE7B;
     color: white;
-    font-size: 20px;
-    ;
+    font-size: 16px;
     height: 50px;
+    border: 1px solid #5ECE7B;
+    justify-content: center;
+    align-items: center;
 }
 
 .minicart_section_order_send_button :hover {
     opacity: 0.9;
     border: 2px solid;
-    font-size: 22px;
+    font-size: 17px;
 }
 
 .minicart_section_single_product_1_options_photo {
@@ -966,6 +1045,7 @@ img {
     grid-auto-rows: 50px;
     background-color: white;
     z-index: 51;
+    box-shadow: 3px 6px 12px #ede8e8;
 }
 .wrapper_currency_options_select {
     display: inline-block;
@@ -981,7 +1061,7 @@ img {
     border: 1px solid grey;
 }
 .wrapper_currency_options :hover {
-    background-color: black;
+    background-color: #EEEEEE;
     color: white;
 }
 .wrapper_currency_options :focus {

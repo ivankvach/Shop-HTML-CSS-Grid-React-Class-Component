@@ -1,9 +1,9 @@
-![Alt text](./src/images/Products1.png "Optional title")
-![Alt text](./src/images/Products2.png "Optional title")
-![Alt text](./src/images/SingleProduct.png "Optional title")
-![Alt text](./src/images/Cart1.png "Optional title")
-![Alt text](./src/images/CartPopup.png "Optional title")
-![Alt text](./src/images/CurrencyPopUp.png "Optional title")
+![Alt text](./src//images/product1.png "Optional title")
+![Alt text](./src/images/product2.png "Optional title")
+![Alt text](./src/images/singleproduct.png "Optional title")
+![Alt text](./src/images/minicart.png "Optional title")
+![Alt text](./src/images/cart.png "Optional title")
+![Alt text](./src/images/currency.png "Optional title")
 
 # Getting Started with Create React App
 

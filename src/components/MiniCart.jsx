@@ -131,11 +131,11 @@ class MiniCart extends React.Component {
                                     <p>{item.title}</p>
                                     <h3>{getSymbolFromCurrency(currency.slice(0, 3))}{(parseFloat(currency.slice(3)).toFixed(2) * item.price).toFixed(2)}</h3>
                                     <h4>SIZE:</h4>
-                                    <select name="size" className="minicart_section_single_product_1_options_size_select" size="8" onClick={(e) => this.addSize(item, e)} required>
+                                    <select name="size" className="minicart_section_single_product_1_options_size_select" size="8" onClick={(e) => this.addSize(item, e)} required={item.size ? "" : "true"}>
                                         {item.allsize.map((size) => <option className="cart_section_single_product_1_options_size_xs" style={ size === item.size ? {  backgroundColor: "black", color: "white"} : {  backgroundColor: "white", color: "black"}} value={size}>{size}</option>)}
                                     </select>
                                     <h4>COLOR:</h4>
-                                    <select name="color" className="minicart_section_single_product_1_options_color_select" size="8" tabindex="-1" onClick={(e) => this.addColor(item, e)} required>
+                                    <select name="color" className="minicart_section_single_product_1_options_color_select" size="8" tabindex="-1" onClick={(e) => this.addColor(item, e)} required={item.size ? "" : "true"}>
                                         {item.allcolor.map((color) => <option className="minicart_section_single_product_1_options_color" tabindex="0" onClick={(e) => e.target.style.boxShadow = `0 0 10px 100px ${color} inset`} style={ color === item.color ? { width: "27px", height: "27px", border: "2px solid grey", backgroundColor: color, color: color } : { backgroundColor: color, color: color }} value={color}></option>)}
                                     </select>
                                 </div>

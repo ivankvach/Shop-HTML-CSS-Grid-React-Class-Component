@@ -1,45 +1,131 @@
 import React from 'react';
+
+import { useParams } from 'react-router-dom';
 import products from '../data';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { setItemS, setSize, setColor } from '../actions';
 import getSymbolFromCurrency from 'currency-symbol-map';
+import { connect } from 'react-redux';
 
-class Products extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {}
-    this.products = products;
-  }
+function withParams(Component) {
+    return props => <Component {...props} params={useParams()} />;
+}
+class SingleProduct extends React.Component {
+    constructor(props) {
+        super(props);
+        this.product = products;
+        this.id = props.params.id;
+        this.itemS = props.itemS;
+        this.sendToCart = props.sendToCart.bind();
+        this.addColor = props.addColor.bind();
+        this.addSize = props.addSize.bind();
+        this.addItem = this.addItem.bind(this)
+        this.setSize = this.setSize.bind(this)
 
-  render() {
+        this.state = {
+            itemS: [],
+            charge: 0,
+            items1: [],
+            emptyCart: true,
+            price: 0,
+            color: "",
+            size: "",
+            itemSS: {}
+        };
+    }
 
-    let currency = this.props.currency;
-    console.log(this.props.currency);
+    static getDerivedStateFromProps(props, state) {
+        return { itemS: props.itemS };
+    }
 
-    return (
-      <div className="wrapper_products">
-        <div className="products_category"><h1>Category name</h1></div>
-        <div className="products_list">
-          {this.products.map((item) =>
-            <div className="product_list_sigle">
-              <div className="product_list_sigle_image">
-                <Link to={`single-product/${item.id}`}><img src={require('../images/' + item.photo + '.png')} alt="1" /></Link>
-              </div>
-              <div className="product_list_sigle_descriptions">
-              <Link to={`single-product/${item.id}`}><h2 className="product_list_sigle_descriptions_title">{item.title}{this.state.query}</h2></Link>
-              <Link to={`single-product/${item.id}`}><h2 className="product_list_sigle_descriptions_price">{getSymbolFromCurrency(currency.slice(0, 3))} {(parseFloat(currency.slice(3)).toFixed(2) * item.price).toFixed(2)}</h2></Link>
-              </div>
-            </div>
-          )}
-        </div>
-      </div >
-    )
-  }
+    componentDidMount() {
+        this.addItem()
+    }
+
+    addItem() {
+       const array = this.product.filter((item) => item.id === this.id).map((item) => item)
+        this.setState({ itemSS: array[0] })
+    }
+
+    setSize(size) {
+        this.setState({ itemSS: { ...this.state.itemSS, "size": size } })
+    }
+    setColor(color) {
+        this.setState({ itemSS: { ...this.state.itemSS, "color": color } })
+    }
+
+
+    render() {
+
+        var itemS = this.props.itemS;
+        let currency = this.props.currency;
+        console.log(this.props.params);
+        console.log(this.state.itemSS);
+        localStorage.setItem("cart", JSON.stringify(itemS))
+        console.log(this.state.size)
+        return (
+            <>
+                {this.product.filter((item) => item.id === this.id).map((item) =>
+                    <div className="wrapper_single_product">
+                        <div className="single_product_left_section">
+                            <div className="single_product_left_section_images"><img src={require('../images/' + item.photo + '.png')} alt="1" /></div>
+                            <div className="single_product_left_section_images"><img src={require('../images/' + item.photo + '.png')} alt="1" /></div>
+                            <div className="single_product_left_section_images"><img src={require('../images/' + item.photo + '.png')} alt="1" /></div>
+                        </div>
+                        <div className="single_product_center_section"><img src={require('../images/' + item.photo + '.png')} alt="1" /></div>
+                        <div className="single_product_right_section">
+                            <h2>{item.title}</h2>
+                            <h2 className="title">{item.title}</h2>
+                            <h4>SIZE:</h4>
+                            <select name="size" className="cart_section_single_product_1_options_size_select" size="8" onClick={(e) => this.addSize(item, e)} required>
+                                {item.allsize.map((size) => <option className="cart_section_single_product_1_options_size_xs" onClick={() => this.setSize(size)} value={size}>{size}</option>)}
+                            </select>
+                            <h4>COLOR:</h4>
+                            <select name="color" className="single_product_1_options_color_select" size="8" tabIndex="-1" onClick={(e) => this.addColor(item, e)} required>
+                                {item.allcolor.map((color) => <option className="cart_section_single_product_1_options_color_grey" tabIndex="0" onClick={(e) => {e.target.style.boxShadow = `0 0 10px 100px ${color} inset`; this.setColor(color)}} style={{ backgroundColor: color, color: color }} value={color}></option>)}
+                            </select>
+                            <h4>PRICE:</h4>
+                            <h3 className="prise">{getSymbolFromCurrency(currency.slice(0, 3))}{(parseFloat(currency.slice(3)).toFixed(2) * item.price).toFixed(2)}</h3>
+                            <div className="single_product_right_section_options_button">
+                                <button onClick={() => this.sendToCart(this.state.itemSS)}>Send to Cart</button>
+                            </div>
+                            <div className="single_product_right_section_options_paragraph">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam impedit hic aliquid officia sunt! Placeat repellendus quis est officiis maiores quasi eaque aut facilis mollitia. Quisquam, eos. Cumque, cum? Quod cupiditate odit excepturi exercitationem cum porro, velit est unde culpa? Fugit et laudantium, nisi temporibus corrupti minus iure unde commodi?</p>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </>
+        )
+    }
+
 }
 
 const mapStateToProps = state => {
-  console.log(state)
-  return state;
+    console.log(state)
+    return state;
 };
 
-export default connect(mapStateToProps)(Products);
+const mapDispatchToProps = dispatch => {
+    return {
+
+        sendToCart: (item) => {
+            dispatch(setItemS({...item, "time": Date.now() }))
+            console.log(item)
+        },
+
+        addSize: (item, e) => {
+            const itemSize = { ...item, "size": e.target.value }
+            console.log(itemSize)
+            dispatch(setSize(itemSize))
+        },
+
+        addColor: (item, e) => {
+            const itemColor = { ...item, "color": e.target.value }
+            console.log(itemColor)
+            dispatch(setColor(itemColor))
+        }
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withParams(SingleProduct));

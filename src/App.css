@@ -39,8 +39,8 @@
 }
 
 .box1_header :hover {
-    color: rgb(87, 200, 87);
-    border-bottom: 3px solid rgb(87, 200, 87);
+    color: #5ECE7B;
+    border-bottom: 3px solid #5ECE7B;
 }
 
 a,
@@ -87,7 +87,7 @@ a :hover a :active {
 }
 
 .box3_header :hover {
-    color: rgb(87, 200, 87);
+    color: #5ECE7B;
 }
 
 .box3_header_currency {
